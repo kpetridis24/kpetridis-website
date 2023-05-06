@@ -7,29 +7,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
     <title>My personal website</title>
     <style>
         h1 {
             color: rgb(180, 160, 110);
             font-family: Calibri, sans-serif;
             font-weight: normal;
-            font-size: 25px;
-            text-align: center;
+            font-size: 35px;
         }
 
         h2 {
             color: darkgoldenrod;
             font-family: Calibri, sans-serif;
             font-weight: normal;
-            font-size: 20px;
-            text-align: center;
+            font-size: 30px;
         }
 
         h3 {
             color: rgb(64, 210, 210);
             font-family: Calibri, sans-serif;
             font-weight: normal;
-            font-size: 20px;
+            font-size: 25px;
         }
 
         body {
@@ -43,12 +42,8 @@
 
         #profile {
             border-radius: 50%;
-            height: 160px;
-            width: 165px;
-        }
-
-        #container1 {
-            margin-top: 60px;
+            height: 200px;
+            width: 210px;
         }
 
     </style>
@@ -56,21 +51,63 @@
 </head>
 
 <body>
-    <div class="container" id="container1">
-    <img id="profile" class="fluid" src="static/profile.jpg" alt="Profile image">
-    <h2 style="margin-bottom: -3px">Software Engineer</h2>
-    <h1>Konstantinos Petridis</h1>
-    <p class="bodytext">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
-        <div style="text-align: center;">
-            <button style="margin-right: 10px">Download CV</button>
-            <button style="margin-left: 10px">Contact</button>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="row">
+                <div class="col-3">
+                    <img id="profile" class="fluid" src="static/profile.jpg" alt="Profile image">
+                </div>
+                <div class="col text-start">
+                    <h2 style="margin-bottom: -3px">{{job_title}}</h2>
+                    <h1>{{full_name}}</h1>
+                    <p class="bodytext lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+            </div>
+        </div>
+            <div class="row mt-3 mb-5">
+                <div class="col text-end">
+                    <a href="static/resume.pdf" download="PDF">
+                        <button class="btn btn-outline-info" type="button">Download CV</button>
+                    </a>
+                </div>
+                <div class="col text-start">
+                    <button class="btn btn-outline-info" type="button" data-toggle="popover" title="Popover title" data-content="And here's">Contact</button>
+                </div>
         </div>
 
-    <h3>What I have done</h3>
+    <h3 class="text-center">What I have done</h3>
+        <div class="mb-4">
+            {% for interest in personal_interests %}
+                <div style="color: darkgoldenrod">
+                    {{interest['name']}}
+                </div>
+            {% endfor %}
+        </div>
+
+    <h3 class="text-center">Professional Experience</h3>
+        <div>
+            {% for experience in professional_experience %}
+                <div class="row border-bottom border-warning" style="color: darkgoldenrod; padding-bottom: 8px">
+                    <div class="col">
+                        <div>
+                            <h4>{{experience['company']}}</h4>
+                            <div>
+                                {{experience['job title']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-end">
+                        <p>{{experience['period']}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+
+
+
 </body>
 
 </html>
